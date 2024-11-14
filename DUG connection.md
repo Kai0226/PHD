@@ -130,3 +130,7 @@ export SAPIENS_LITE_ROOT="/group/pmc015/kniu/kai_phd/Video-Generation/third_part
 export SAPIENS_LITE_CHECKPOINT_ROOT="/group/pmc015/kniu/kai_phd/models/Sapiens/sapiens_lite_host"
 ~                                                                                                      
 ```
+
+```
+salloc -p gpu -n 4 -c 2 --gres=gpu:4
+```
