@@ -90,3 +90,34 @@ python /data/uwa_multimodality/uwa_niuk/project/Text-To-Video-Finetuning/Video-B
 echo "Videos Captioned"
 
 ```
+
+
+
+```
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/uwahpc/centos8/python/Anaconda3/2024.06/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/uwahpc/centos8/python/Anaconda3/2024.06/etc/profile.d/conda.sh" ]; then
+        . "/uwahpc/centos8/python/Anaconda3/2024.06/etc/profile.d/conda.sh"
+    else
+        export PATH="/uwahpc/centos8/python/Anaconda3/2024.06/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# . /uwahpc/centos8/python/Anaconda3/2024.06/etc/profile.d/conda.sh  # commented out by conda initialize
+# conda activate  # commented out by conda initialize
+
+export CONDA_PKGS_DIRS=/group/pmc015/kniu/kai_phd/conda_env/.conda-pkgs
+export PIP_CACHE_DIR=/group/pmc015/kniu/kai_phd/conda_env/.pip-cache
+export TORCH_HOME=/group/pmc015/kniu/kai_phd/conda_env/torch/
+export HF_HOME=/group/pmc015/kniu/kai_phd/conda_env/hf/
+export HF_DATASETS_CACHE=/group/pmc015/kniu/kai_phd/conda_env/hf/datasets
+export TRANSFORMERS_CACHE=/group/pmc015/kniu/kai_phd/conda_env/hf/models
+
+```
