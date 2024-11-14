@@ -119,5 +119,6 @@ export TORCH_HOME=/group/pmc015/kniu/kai_phd/conda_env/torch/
 export HF_HOME=/group/pmc015/kniu/kai_phd/conda_env/hf/
 export HF_DATASETS_CACHE=/group/pmc015/kniu/kai_phd/conda_env/hf/datasets
 export TRANSFORMERS_CACHE=/group/pmc015/kniu/kai_phd/conda_env/hf/models
+export CONDA_ENVS_PATH=/group/pmc015/kniu/kai_phd/conda_env
 
 ```
