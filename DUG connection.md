@@ -120,5 +120,13 @@ export HF_HOME=/group/pmc015/kniu/kai_phd/conda_env/hf/
 export HF_DATASETS_CACHE=/group/pmc015/kniu/kai_phd/conda_env/hf/datasets
 export TRANSFORMERS_CACHE=/group/pmc015/kniu/kai_phd/conda_env/hf/models
 export CONDA_ENVS_PATH=/group/pmc015/kniu/kai_phd/conda_env
-
+export OUTPUT_PATH=/group/pmc015/kniu/kai_phd/output
+export DATA_PATH=/group/pmc015/kniu/kai_phd/data
+export MODEL_PATH=/group/pmc015/kniu/kai_phd/models
+export EVAL_PATH="/group/pmc015/kniu/kai_phd/eval"
+export SAPIENS_ROOT="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Sapiens/"
+export SAPIENS_CHECKPOINT_ROOT="/group/pmc015/kniu/kai_phd/models/Sapiens/sapiens_host"
+export SAPIENS_LITE_ROOT="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Sapiens/lite/"
+export SAPIENS_LITE_CHECKPOINT_ROOT="/group/pmc015/kniu/kai_phd/models/Sapiens/sapiens_lite_host"
+~                                                                                                      
 ```
