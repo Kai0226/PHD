@@ -124,10 +124,15 @@ export OUTPUT_PATH=/group/pmc015/kniu/kai_phd/output
 export DATA_PATH=/group/pmc015/kniu/kai_phd/data
 export MODEL_PATH=/group/pmc015/kniu/kai_phd/models
 export EVAL_PATH="/group/pmc015/kniu/kai_phd/eval"
-export SAPIENS_ROOT="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Sapiens/"
-export SAPIENS_CHECKPOINT_ROOT="/group/pmc015/kniu/kai_phd/models/Sapiens/sapiens_host"
-export SAPIENS_LITE_ROOT="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Sapiens/lite/"
-export SAPIENS_LITE_CHECKPOINT_ROOT="/group/pmc015/kniu/kai_phd/models/Sapiens/sapiens_lite_host"
+export SAPIENS_ROOT="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Sapp
+iens/"
+export SAPIENS_CHECKPOINT_ROOT="/group/pmc015/kniu/kai_phd/models/Sapiens/sapienn
+s_host"
+export SAPIENS_LITE_ROOT="/group/pmc015/kniu/kai_phd/Video-Generation/third_partt
+y/Sapiens/lite/"
+export SAPIENS_LITE_CHECKPOINT_ROOT="/group/pmc015/kniu/kai_phd/models/Sapiens/ss
+apiens_lite_host"
+
 ~                                                                                                      
 ```
 
