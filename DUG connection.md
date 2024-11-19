@@ -132,6 +132,10 @@ export SAPIENS_LITE_ROOT="/group/pmc015/kniu/kai_phd/Video-Generation/third_part
 y/Sapiens/lite/"
 export SAPIENS_LITE_CHECKPOINT_ROOT="/group/pmc015/kniu/kai_phd/models/Sapiens/ss
 apiens_lite_host"
+export FFMPEG_PATH="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/ffmpp
+eg-git-20240629-amd64-static"
+export BLENDER_PATH="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/blee
+nder-3.6.0-linux-x64"
 
 ~                                                                                                      
 ```
