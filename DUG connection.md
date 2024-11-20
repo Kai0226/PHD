@@ -138,9 +138,11 @@ export BLENDER_PATH="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/ble
 nder-3.6.0-linux-x64"
 export CHAMP_PATH="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/"
 
+
 ~                                                                                                      
 ```
 
 ```
 salloc -p gpu -n 4 -c 2 --gres=gpu:4
+salloc -p pophealth --mem=40G -N 1 -n 8 --gres=gpu:a100:1
 ```
