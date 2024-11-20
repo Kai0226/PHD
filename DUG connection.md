@@ -136,6 +136,7 @@ export FFMPEG_PATH="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/ffmp
 eg-git-20240629-amd64-static"
 export BLENDER_PATH="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/blee
 nder-3.6.0-linux-x64"
+export CHAMP_PATH="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/"
 
 ~                                                                                                      
 ```
