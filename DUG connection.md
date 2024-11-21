@@ -339,5 +339,52 @@ accelerate launch train.py
 ```
 
 ```
-accelerate launch --multi_gpu --num_processes=4 --gpu_ids '0,1,2,3' Video-Generation/third_party/Champ/train_s1_new.py 
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ accelerate config
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------In which compute environment are you running?
+This machine                                                                                                                                                                   
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Which type of machine are you using?                                                                                                                                           
+multi-GPU                                                                                                                                                                      
+How many different machines will you use (use more than 1 for multi-node training)? [1]:                                                                                       
+Should distributed operations be checked while running for errors? This can avoid timeout issues but will be slower. [yes/NO]:                                                 
+Do you wish to optimize your script with torch dynamo?[yes/NO]:                                                                                                                
+Do you want to use DeepSpeed? [yes/NO]:                                                                                                                                        
+Do you want to use FullyShardedDataParallel? [yes/NO]:                                                                                                                         
+Do you want to use Megatron-LM ? [yes/NO]:                                                                                                                                     
+How many GPU(s) should be used for distributed training? [1]:4                                                                                                                 
+What GPU(s) (by id) should be used for training on this machine as a comma-seperated list? [all]:all                                                                           
+Would you like to enable numa efficiency? (Currently only supported on NVIDIA hardware). [yes/NO]: 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Do you wish to use mixed precision?
+fp16                                                                                                                                                                           
+accelerate configuration saved at /group/pmc015/kniu/kai_phd/conda_env/hf/accelerate/default_config.yaml                                                                       
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ accelerate launch Video-Generation/third_party/Champ/train_s1_new.py 
+/group/pmc015/kniu/kai_phd/conda_env/champ/lib/python3.10/site-packages/diffusers/utils/outputs.py:63: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.                                                                                                                     
+  torch.utils._pytree._register_pytree_node(
+/group/pmc015/kniu/kai_phd/conda_env/champ/lib/python3.10/site-packages/diffusers/utils/outputs.py:63: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  torch.utils._pytree._register_pytree_node(
+/group/pmc015/kniu/kai_phd/conda_env/champ/lib/python3.10/site-packages/diffusers/utils/outputs.py:63: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  torch.utils._pytree._register_pytree_node(
+/group/pmc015/kniu/kai_phd/conda_env/champ/lib/python3.10/site-packages/diffusers/utils/outputs.py:63: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  torch.utils._pytree._register_pytree_node(
+2024-11-21 20:28:12.652154: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-11-21 20:28:12.652154: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-11-21 20:28:12.652155: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-11-21 20:28:12.657235: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+/group/pmc015/kniu/kai_phd/conda_env/champ/lib/python3.10/site-packages/diffusers/utils/outputs.py:63: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  torch.utils._pytree._register_pytree_node(
+/group/pmc015/kniu/kai_phd/conda_env/champ/lib/python3.10/site-packages/diffusers/utils/outputs.py:63: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  torch.utils._pytree._register_pytree_node(
+/group/pmc015/kniu/kai_phd/conda_env/champ/lib/python3.10/site-packages/diffusers/utils/outputs.py:63: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  torch.utils._pytree._register_pytree_node(
+/group/pmc015/kniu/kai_phd/conda_env/champ/lib/python3.10/site-packages/diffusers/utils/outputs.py:63: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  torch.utils._pytree._register_pytree_node(
+Number of available GPUs: 4
+Device 0: NVIDIA A100-SXM4-40GB
+Device 1: NVIDIA A100-SXM4-40GB
+Device 2: NVIDIA A100-SXM4-40GB
+Device 3: NVIDIA A100-SXM4-40GB
+
 ```
