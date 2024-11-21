@@ -337,3 +337,7 @@ Then launch your training with:
 ```
 accelerate launch train.py
 ```
+
+```
+accelerate launch --multi_gpu --num_processes=4 --gpu_ids '0,1,2,3' Video-Generation/third_party/Champ/train_s1_new.py 
+```
