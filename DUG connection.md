@@ -279,3 +279,8 @@ helloworld_gnu.slurm  README
 (/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ less helloworld_gnu.slurm 
 
 ```
+
+Use Accelerate for distributed training:
+
+https://huggingface.co/docs/transformers/en/accelerate
+https://huggingface.co/docs/accelerate/en/usage_guides/distributed_inference
