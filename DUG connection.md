@@ -146,3 +146,136 @@ export CHAMP_PATH="/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ
 salloc -p gpu -n 4 -c 2 --gres=gpu:4
 salloc -p pophealth --mem=40G -N 1 -n 8 --gres=gpu:a100:1
 ```
+
+
+Multiple GPU Usage:
+
+
+-N 2 means apply multiple GPUs from 2 seperate computer nodes, not apply 2 GPUs from 1 computers nodes, that's why it will have the error 
+```
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ salloc -p pophealth --mem=80G -N 2 -n 8 --gres=gpu:a100:2
+salloc: Job allocation 550543 has been revoked.
+salloc: error: Job submit/allocate failed: Requested node configuration is not available
+
+```
+
+hostname - get the hostname of the coputer that host GPUs
+```
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ hostname
+n006.hpc.uwa.edu.au
+```
+
+Use exit to exit the GPU usage session
+```
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ exit
+srun: error: n006: task 0: Exited with exit code 130
+salloc: Relinquishing job allocation 550408
+salloc: Job allocation 550408 has been revoked.
+
+```
+
+Check GPUs information. As we can see, the partition 'pophealth' has 2 computer codes that host GPUs, one is '002' which has 2 V100, and one is '006' which has 4 A100.
+```
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ sinfo
+PARTITION    AVAIL  TIMELIMIT  NODES  STATE NODELIST
+work            up 3-00:00:00      2  down* n[023,027]
+work            up 3-00:00:00      3  drain n[026,029,032]
+work            up 3-00:00:00      5    mix n[010,015-016,024,028]
+work            up 3-00:00:00     12   idle n[011-013,017-019,022,025,030-031,033-034]
+long            up 7-00:00:00      1    mix n021
+long            up 7-00:00:00      1  alloc n020
+gpu             up 3-00:00:00     13    mix n[001,003-005,037-044,046]
+pophealth       up 15-00:00:0      2   idle n[002,006]
+ondemand        up   12:00:00      1  down* n027
+ondemand        up   12:00:00      1  drain n026
+ondemand        up   12:00:00      2    mix n[024,028]
+ondemand        up   12:00:00      1   idle n025
+ondemand-gpu    up   12:00:00      8    mix n[036-043]
+```
+
+To apply gpu, alwayse use the login nodes, then use 'salloc' command to switch to GPUs computer nodes.
+You have to specify the GPUs usage time for A100, the time follows convention '--time=D-HH:MM:SS'
+```
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ cd 
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ ls
+package.json  package-lock.json
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ pwd
+/home/kniu
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ salloc -p pophealth --time=2-00:00:00 --mem=128G -n 8 --gres=gpu:a100:4
+salloc: Pending job allocation 550997
+salloc: job 550997 queued and waiting for resources
+salloc: job 550997 has been allocated resources
+salloc: Granted job allocation 550997
+(base) bash-4.4$ conda activate champ
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ nvidia-smi
+Thu Nov 21 15:12:38 2024       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.54.14              Driver Version: 550.54.14      CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          Off |   00000000:01:00.0 Off |                    0 |
+| N/A   31C    P0             50W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA A100-SXM4-40GB          Off |   00000000:41:00.0 Off |                    0 |
+| N/A   29C    P0             50W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100-SXM4-40GB          Off |   00000000:81:00.0 Off |                    0 |
+| N/A   31C    P0             49W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA A100-SXM4-40GB          Off |   00000000:C1:00.0 Off |                    0 |
+| N/A   30C    P0             52W /  400W |       0MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+```
+
+To get slurm example for running multiple threads:
+```
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ module load getexample
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ getexample
+kaya
+Download an HPC example:
+usage:
+   getexample <examplename>
+
+Where <examplename> is the name of the example you want to 
+download.  This will create a directory named examplename which
+you can cd into and hopefully read the README file 
+ and the *.slurm file.
+
+For Example:
+  getexample helloworld
+
+Possible example names:
+/uwahpc/centos8/tools/binary/getexample/kaya_examples
+abaqus-explicit           fortranHybrid_gnu  grasp_mpi    hello_mpi_c_intel    kat         molpro  orca       swash
+abaqus-exp-usercode       fortranMPI_gnu     gromacs_mpi  hello_mpi_gnu.slurm  lammps_mpi  mrcc    structure  training_hello
+fortran_helloworld_intel  gaussian           helloC_gnu   helloOmp_gnuC        lsdyna      nwchem  swan       training_MPI
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ getexample helloC_gnu
+kaya
+found directory
+'/uwahpc/centos8/tools/binary/getexample/kaya_examples/helloC_gnu' -> './helloC_gnu'
+'/uwahpc/centos8/tools/binary/getexample/kaya_examples/helloC_gnu/README' -> './helloC_gnu/README'
+'/uwahpc/centos8/tools/binary/getexample/kaya_examples/helloC_gnu/helloworld_gnu.slurm' -> './helloC_gnu/helloworld_gnu.slurm'
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ ls
+conda  conda_results  helloC_gnu  huggingface  kai_phd  nohup.out  Untitled1.ipynb  Untitled.ipynb
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ cd helloC_gnu/
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ ls
+helloworld_gnu.slurm  README
+(/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ less helloworld_gnu.slurm 
+
+```
