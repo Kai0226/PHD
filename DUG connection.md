@@ -388,3 +388,8 @@ Device 2: NVIDIA A100-SXM4-40GB
 Device 3: NVIDIA A100-SXM4-40GB
 
 ```
+
+
+```
+salloc -p pophealth --time=2-00:00:00 --mem=40G -n 8 --gres=gpu:a100:1 --exclusive
+```
