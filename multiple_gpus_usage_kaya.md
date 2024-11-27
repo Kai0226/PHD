@@ -2,7 +2,7 @@
 # Multiple GPU Usage - UWA KAYA:
 
 
--N 2 means apply multiple GPUs from 2 seperate computer nodes, not apply 2 GPUs from 1 computers nodes, that's why it will have the error 
+-N 2 means apply multiple GPUs from 2 seperate computer nodes, not apply 2 GPUs from multiple computers nodes, that's why it will have the error 
 ```
 (/group/pmc015/kniu/kai_phd/conda_env/champ) bash-4.4$ salloc -p pophealth --mem=80G -N 2 -n 8 --gres=gpu:a100:2
 salloc: Job allocation 550543 has been revoked.
