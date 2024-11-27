@@ -247,6 +247,8 @@ salloc -p pophealth --time=2-00:00:00 --mem=40G -n 8 --gres=gpu:a100:1 --exclusi
 
 
 # Slurm
+
+Train slurm:
 ```
 #!/bin/bash --login
 # SBATCH --job-name=calisthenic_train_50000 # name your job
@@ -262,15 +264,21 @@ module load gcc/12.4.0
 conda activate champ
 
 # your python script here
-python ../third_party/Champ/main.py --run_type train  >> output.txt
+python ../third_party/Champ/main.py --run_type train
 ```
+run slurm
 
 ```
 sbatch inference.slurm
-
- squeue -u kniu
-
- squeue --job 552099
-
- scancel 552099
+```
+check job
+```
+squeue -u kniu
+```
+```
+ squeue --job 552101
+```
+cancel job
+```
+scancel 552099
 ```
