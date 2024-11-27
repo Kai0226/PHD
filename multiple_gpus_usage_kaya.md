@@ -180,7 +180,7 @@ https://huggingface.co/docs/accelerate/en/usage_guides/distributed_inference
 ```
 Train with a script
 
-If you are running your training from a script, run the following command to create and save a configuration file:
+If you are running your training from a script, run the following command to create and save a configuration file - choos using 'Multiple GPUs':
 ```
 accelerate config
 ```
