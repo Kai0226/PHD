@@ -148,7 +148,7 @@ salloc -p pophealth --mem=40G -N 1 -n 8 --gres=gpu:a100:1
 ```
 
 
-Multiple GPU Usage:
+# Multiple GPU Usage:
 
 
 -N 2 means apply multiple GPUs from 2 seperate computer nodes, not apply 2 GPUs from 1 computers nodes, that's why it will have the error 
