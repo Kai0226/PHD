@@ -295,3 +295,9 @@ rsync -aP  kniu@kaya.hpc.uwa.edu.au:/group/pmc015/kniu/kai_phd/Video-Generation/
 ```
 rsync -aP  kniu@kaya.hpc.uwa.edu.au:/group/pmc015/kniu/kai_phd/Video-Generation/output/exp_output_normal_semantic_map/stage1/validation/ /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generation/output/youtube_new/Champ_new/model_output/exp_output_normal_semantic_map/stage1/validation/
 ```
+
+
+```
+salloc -p pophealth --time=5-00:00:00 --mem=40G -n 8 --gres=gpu:a100:1 --ntasks 10
+
+```
