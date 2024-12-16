@@ -303,6 +303,10 @@ salloc -p pophealth --time=5-00:00:00 --mem=40G -n 8 --gres=gpu:a100:1 --ntasks 
 ```
 
 # Trained Models
+
+```
+python main_new_new.py 
+```
 ```
 drwxrwxr-x 3 kniu kniu 0 Dec 13 15:04 exp_output_normal                   -- 
 drwxrwxr-x 4 kniu kniu 0 Dec  2 08:30 exp_output_normal_semantic_map                   -- 2 conditions (normal, semantic maps) - foreground
