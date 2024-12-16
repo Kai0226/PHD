@@ -301,3 +301,11 @@ rsync -aP  kniu@kaya.hpc.uwa.edu.au:/group/pmc015/kniu/kai_phd/Video-Generation/
 salloc -p pophealth --time=5-00:00:00 --mem=40G -n 8 --gres=gpu:a100:1 --ntasks 10
 
 ```
+
+# Trained Models
+```
+drwxrwxr-x 3 kniu kniu 0 Dec 13 15:04 exp_output_normal                   -- 
+drwxrwxr-x 4 kniu kniu 0 Dec  2 08:30 exp_output_normal_semantic_map                   -- 2 conditions (normal, semantic maps) - foreground
+drwxrwxr-x 4 kniu kniu 0 Nov 28 14:28 exp_output_normal_semantic_map_50000                   -- 2 conditions (normal, semantic maps) - original view
+drwxrwxr-x 3 kniu kniu 0 Dec 14 09:05 exp_output_semantic_map
+```
