@@ -308,10 +308,13 @@ salloc -p pophealth --time=5-00:00:00 --mem=40G -n 8 --gres=gpu:a100:1 --ntasks 
 python main_new_new.py 
 ```
 ```
-drwxrwxr-x 3 kniu kniu 0 Dec 13 15:04 exp_output_normal                   -- 
+drwxrwxr-x 3 kniu kniu 0 Dec 13 15:04 exp_output_normal                   -- 1 condition - normal - foreground
 drwxrwxr-x 4 kniu kniu 0 Dec  2 08:30 exp_output_normal_semantic_map                   -- 2 conditions (normal, semantic maps) - foreground
 drwxrwxr-x 4 kniu kniu 0 Nov 28 14:28 exp_output_normal_semantic_map_50000                   -- 2 conditions (normal, semantic maps) - original view
-drwxrwxr-x 3 kniu kniu 0 Dec 14 09:05 exp_output_semantic_map
+drwxrwxr-x 3 kniu kniu 0 Dec 14 09:05 exp_output_semantic_map                   -- 1 condition - semantic_map - foreground
+
+exp_output_depth                     -- 1 condition - depth - foreground
+exp_output_dwpose                   -- 1 condition - keypioints133 - foreground   &                    -- 1 condition - tracking_points - foreground
 ```
 
 # copy the trained model from kaya to local
