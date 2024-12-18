@@ -317,6 +317,18 @@ exp_output_depth                     -- 1 condition - depth - foreground
 exp_output_dwpose                   -- 1 condition - keypioints133 - foreground   &                    -- 1 condition - tracking_points - foreground
 ```
 
+```
+eval_result_depth_normal_semantic_map_dwpose_champ
+eval_result_normal_semantic_map_50000
+eval_result_normal_semantic_map               - 2 condition - foreground
+
+generated_video_normal               - 1 condition
+generated_video_normal_semantic_map_50000               - 2 condition - original view
+generated_video_depth_normal_semantic_map_dwpose_champ               - 4 condition - CHAMP
+generated_video_normal_semantic_map               - 2 condition
+generated_video_semantic_map               - 1 condition
+```
+
 # copy the trained model from kaya to local
 ```
 aws s3 sync /group/pmc015/kniu/kai_phd/Video-Generation/output  s3://video-generation-calisthenics/train/output/
