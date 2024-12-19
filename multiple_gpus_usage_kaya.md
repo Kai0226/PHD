@@ -318,6 +318,8 @@ exp_output_dwpose                   -- 1 condition - keypioints133 - foreground 
 ```
 
 ```
+
+
 eval_result_depth_normal_semantic_map_dwpose_champ
 eval_result_normal_semantic_map_50000
 eval_result_normal_semantic_map               - 2 condition - foreground
@@ -348,4 +350,168 @@ python evaluate_new_new.py     in 'Calisthenic/evaluate' in Kaya, with env 'cham
 ```
 generic-diffusion-feature/feature/example.py   -attention map
 ''Calisthenic/process/plot_attention.py    - plot attention
+```
+
+Have a look gpto output for inference with attention map:
+
+```
+Below is an example of how you can modify the code to capture and return the latent attention features from each layer of the diffusion blocks. The main idea is to:
+
+1. Hook into the U-Net(s) or the reference control modules (`ReferenceAttentionControl`) where attention maps are computed.
+2. Store the attention maps during the forward pass.
+3. After the inference step is complete, retrieve these stored attention maps and return them.
+
+**Key Assumptions**:  
+- Your `ReferenceAttentionControl` or U-Net classes provide a way to hook into or retrieve attention maps. If they do not, you will need to add such functionality by modifying their forward methods or by adding forward hooks.
+- In the code snippet below, we assume that `ReferenceAttentionControl` has a method `get_attention_maps()` that returns the collected attention maps. If it doesn't exist, you will need to implement a mechanism to store attention maps within `ReferenceAttentionControl` or in the U-Net forward pass itself.
+- We also assume that the pipeline call returns only videos by default. We will modify it to return both videos and attention maps.
+
+**Changes made**:
+- Add a step in `inference()` to retrieve attention maps from the model's `reference_control_reader`.
+- Modify the `inference()` function signature and return value to include attention maps.
+- After running the pipeline, collect attention maps and return them.
+
+```python
+def inference(
+    cfg,
+    vae,
+    image_enc,
+    prompt,
+    negative_prompt,
+    text_enc,
+    tokenizer,
+    model,
+    scheduler,
+    ref_image_pil,
+    guidance_pil_group,
+    video_length,
+    width,
+    height,
+    device="cuda",
+    dtype=torch.float16,
+):
+    reference_unet = model.reference_unet
+    denoising_unet = model.denoising_unet
+    guidance_types = cfg.guidance_types
+    guidance_types_model = guidance_types
+    for i in range(len(guidance_types)):
+        if guidance_types[i] == "tracking" or guidance_types[i] == "optical_flow":
+            guidance_types_model[i] = "depth"
+
+    guidance_encoder_group = {
+        f"guidance_encoder_{g}": getattr(model, f"guidance_encoder_{g}")
+        for g in guidance_types_model
+    }
+
+    generator = torch.Generator(device=device)
+    generator.manual_seed(cfg.seed)
+    pipeline = MultiGuidance2LongVideoPipeline(
+        vae=vae,
+        image_encoder=image_enc,
+        text_encoder=text_enc,
+        tokenizer=tokenizer,
+        reference_unet=reference_unet,
+        denoising_unet=denoising_unet,
+        **guidance_encoder_group,
+        scheduler=scheduler,
+        guidance_process_size=cfg.data.get("guidance_process_size", None)
+    )
+    pipeline = pipeline.to(device, dtype)
+
+    # Run the pipeline as usual
+    output = pipeline(
+        ref_image_pil,
+        prompt,
+        negative_prompt,
+        guidance_pil_group,
+        width,
+        height,
+        video_length,
+        num_inference_steps=cfg.num_inference_steps,
+        guidance_scale=cfg.guidance_scale,
+        generator=generator,
+    )
+    video = output.videos
+
+    # After pipeline execution, retrieve attention maps
+    # Assuming `reference_control_reader` has a method to return attention maps
+    # If not, you need to implement a way to store them inside `ReferenceAttentionControl`.
+    attention_maps = model.reference_control_reader.get_attention_maps()
+
+    # Cleanup
+    del pipeline
+    torch.cuda.empty_cache()
+
+    return video, attention_maps
+```
+
+**Within `main()`**:  
+- Capture the returned attention maps from `inference()`.
+
+```python
+def main(cfg, video_name):
+    # ... (existing code above remains unchanged)
+
+    result_video_tensor, attention_maps = inference(
+        cfg=cfg,
+        vae=vae,
+        image_enc=image_enc,
+        prompt=cfg.prompt,
+        negative_prompt=cfg.negative_prompt,
+        text_enc=text_enc,
+        tokenizer=tokenizer,
+        model=model,
+        scheduler=noise_scheduler,
+        ref_image_pil=ref_image_pil,
+        guidance_pil_group=guidance_pil_group,
+        video_length=video_length,
+        width=cfg.width,
+        height=cfg.height,
+        device="cuda",
+        dtype=weight_dtype,
+    )
+
+    # Now you have `attention_maps` which you can save or analyze as needed.
+    # `attention_maps` might be a dictionary or a list of tensors depending on your `get_attention_maps()` implementation.
+    # For example, if you want to save them:
+    torch.save(attention_maps, osp.join(save_dir, "attention_maps.pt"))
+
+    # The rest of the code remains the same
+    result_video_tensor = resize_tensor_frames(
+        result_video_tensor, (ref_image_h, ref_image_w)
+    )
+    save_videos_grid(result_video_tensor, osp.join(save_dir, "animation.mp4"))
+
+    # ... (rest of your saving code)
+```
+
+**Inside `ReferenceAttentionControl` (if needed)**:  
+You need to ensure there is a mechanism to store and retrieve attention maps. For example:
+
+```python
+class ReferenceAttentionControl:
+    def __init__(self, unet, do_classifier_free_guidance, mode, fusion_blocks="full"):
+        # ... your existing init code
+        self.attention_maps = []
+
+        # You might add forward hooks to attention layers here:
+        for block in unet.attention_blocks:
+            block.attn.register_forward_hook(self.save_attention_map_hook)
+
+    def save_attention_map_hook(self, module, input, output):
+        # Assuming `output` is something like (hidden_states, attention_probs)
+        # or that you can access attention weights here.
+        # You may need to adjust this code depending on the actual structure of your model.
+        self.attention_maps.append(output[1].detach().cpu())
+
+    def get_attention_maps(self):
+        return self.attention_maps
+```
+
+**Important Notes**:
+- The actual implementation of how you retrieve the attention maps depends heavily on how the `UNet` and `ReferenceAttentionControl` classes are structured and how they handle attention. You may need to adapt the above hook logic accordingly.
+- If your attention maps are computed directly in the U-Net forward pass, consider placing hooks directly on the attention layers of the U-Net models.
+- Ensure that `get_attention_maps()` returns the collected attention maps in the format you need. This could be a list of tensors, a dictionary keyed by layer, etc.
+
+With these changes, after running inference, you will not only have the generated video but also the captured latent attention maps from each layer of the diffusion blocks.
 ```
