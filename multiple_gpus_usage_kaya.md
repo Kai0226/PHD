@@ -347,4 +347,5 @@ python evaluate_new_new.py     in 'Calisthenic/evaluate' in Kaya, with env 'cham
 
 ```
 generic-diffusion-feature/feature/example.py   -attention map
+''Calisthenic/process/plot_attention.py    - plot attention
 ```
