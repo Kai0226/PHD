@@ -344,3 +344,7 @@ python evaluate_new_new.py     in 'Calisthenic/evaluate' in Kaya, with env 'cham
 
 # Evaluate the methods with CHAMP metrics: 'MagicDance/too/metrics/metric_center_new.py'    with magicdance env
 ```
+
+```
+generic-diffusion-feature/feature/example.py   -attention map
+```
