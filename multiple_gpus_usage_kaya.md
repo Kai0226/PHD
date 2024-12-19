@@ -336,6 +336,10 @@ aws s3 sync /group/pmc015/kniu/kai_phd/Video-Generation/output  s3://video-gener
 
 ```
 python main_new_new.py      in 'third_party/Champ' in kaya with env 'champ'  - by setting up 'run_type' for training or inference
+
+rsync -aP  kniu@kaya.hpc.uwa.edu.au:/group/pmc015/kniu/kai_phd/Video-Generation/test/generated_video_normal /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generation/output/youtube_new/Champ_new/results/generated_video_normmal
+
+module load ffmpeg/4.4    # need to load ffmpeg for evaluation
 python evaluate_new_new.py     in 'Calisthenic/evaluate' in Kaya, with env 'champ'
 
 # Evaluate the methods with CHAMP metrics: 'MagicDance/too/metrics/metric_center_new.py'    with magicdance env
