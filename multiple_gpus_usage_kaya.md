@@ -319,16 +319,26 @@ exp_output_dwpose                   -- 1 condition - keypioints133 - foreground 
 
 ```
 
+exp_output_normal_semantic_map - stage1, stage2
+exp_output_normal_semantic_map_50000 - stage1, stage2
+exp_output_depth - stage1
+exp_output_dwpose  - stage1_keypoints  stage1_tracking_points  stage2_tracking_points  stage2_keypoints
+exp_output_normal - stage1, stage2
+exp_output_semantic_map - stage1, stage2
+
+generated_video_normal_semantic_map_50000               - 2 condition - original view
+generated_video_depth_normal_semantic_map_dwpose_champ               - 4 condition - CHAMP
+generated_video_normal_semantic_map               - 2 condition
+generated_video_normal               - 1 condition
+generated_video_semantic_map               - 1 condition
+generated_video_dwpose_keypoints
 
 eval_result_depth_normal_semantic_map_dwpose_champ
 eval_result_normal_semantic_map_50000
 eval_result_normal_semantic_map               - 2 condition - foreground
+eval_result_normal
+eval_result_semantic_map
 
-generated_video_normal               - 1 condition
-generated_video_normal_semantic_map_50000               - 2 condition - original view
-generated_video_depth_normal_semantic_map_dwpose_champ               - 4 condition - CHAMP
-generated_video_normal_semantic_map               - 2 condition
-generated_video_semantic_map               - 1 condition
 ```
 
 # copy the trained model from kaya to local
