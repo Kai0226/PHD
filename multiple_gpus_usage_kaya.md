@@ -8,6 +8,7 @@ tensorflow 2.16.1
 ```
 conda install "conda-forge/linux-64::pytorch 2.1.2 cuda120_py310h327d3bc_301"
 
+conda install "conda-forge/linux-64::tensorflow 2.16.1 cuda120py310hfaee7bf_0"
 ```
 
 # Multiple GPU Usage - UWA KAYA:
