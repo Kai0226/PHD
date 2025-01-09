@@ -1,3 +1,11 @@
+# Install conda env
+Champ env - 
+```
+Python 3.10.14
+Pytorch 2.2.2+cu121
+tensorflow 2.16.1
+```
+
 
 # Multiple GPU Usage - UWA KAYA:
 
