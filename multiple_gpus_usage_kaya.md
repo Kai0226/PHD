@@ -5,7 +5,10 @@ Python 3.10.14
 Pytorch 2.2.2+cu121
 tensorflow 2.16.1
 ```
+```
+conda install "conda-forge/linux-64::pytorch 2.1.2 cuda120_py310h327d3bc_301"
 
+```
 
 # Multiple GPU Usage - UWA KAYA:
 
