@@ -21,6 +21,9 @@ conda install "conda-forge/linux-64::pytorch 2.1.2 cuda120_py310h327d3bc_301"
 
 conda install "conda-forge/linux-64::tensorflow 2.16.1 cuda120py310hfaee7bf_0"
 
+pip uninstall -y torch torchvision
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+
 pip install -r requirements.txt
 
 pip install numpy==1.23.5
