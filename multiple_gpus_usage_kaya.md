@@ -4,6 +4,12 @@ Champ env -
 Python 3.10.14
 Pytorch 2.2.2+cu121
 tensorflow 2.16.1
+
+
+PyTorch: 2.5.1+cu124
+CUDA Toolkit: 12.4 (headers and libs)
+GCC >= 9 (you already loaded or installed GCC 12.4.0)
+GPU Driver: 550.54.14, which supports CUDA 12.4 on A100
 ```
 ```
 
@@ -18,6 +24,26 @@ conda install "conda-forge/linux-64::tensorflow 2.16.1 cuda120py310hfaee7bf_0"
 pip install -r requirements.txt
 
 pip install numpy==1.23.5
+
+module load gcc/12.4.0
+module load cuda/12.4
+
+pip uninstall xformers
+git clone https://github.com/facebookresearch/xformers.git
+cd xformers
+# Optionally set your arch explicitly. For A100: 
+export TORCH_CUDA_ARCH_LIST="8.0"
+
+# Make sure submodules are in place
+git submodule update --init --recursive
+
+# Optional: set compute capability for an A100
+export TORCH_CUDA_ARCH_LIST="8.0"
+
+# Reinstall xFormers using the newer compiler
+pip install .
+
+
 ```
 
 # Multiple GPU Usage - UWA KAYA:
