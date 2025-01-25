@@ -393,6 +393,7 @@ eval_result_semantic_map
 
 # copy the trained model from kaya to local
 ```
+ module load awscli/2.10.3 
 aws s3 sync /group/pmc015/kniu/kai_phd/Video-Generation/output  s3://video-generation-calisthenics/train/output/
 ```
 
