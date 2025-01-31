@@ -395,7 +395,7 @@ eval_result_semantic_map
 ```
  module load awscli/2.10.3 
 aws s3 sync /group/pmc015/kniu/kai_phd/Video-Generation/output  s3://video-generation-calisthenics/train/output/
-aws s3 sync /group/pmc015/kniu/kai_phd/Video-Generation/third_pay/Champ_text s3://video-generation-calisthenics/code/Champ_text
+aws s3 sync /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ_text s3://video-generation-calisthenics/code/Champ_text
 
 ```
 
