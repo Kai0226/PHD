@@ -578,3 +578,12 @@ class ReferenceAttentionControl:
 
 With these changes, after running inference, you will not only have the generated video but also the captured latent attention maps from each layer of the diffusion blocks.
 ```
+
+# Calisthenic Video Generation Model
+```
+/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ - Orignial CHAMP model modifed for tracking points. The model used in Calisthenic Video Dataset paper
+/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ_text - the architecture modified in JointTextMotionTemporalBasicTransformerBlock class, to accept text embedding (object motion captions) as encoded_hidden_states. The cross attention is calculated between latent_states (motion sequences) and text_embedding. The 1st training stage is fine on 1A100, but the 2rd training stage is OOMM on 4A100s even though using 'gradient_accumulation_steps' 8.
+/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ_text_claude_28jan2025 - The code generated from Claude. It includes an extra attention block to implement cross attention between latent_states and text embedding, which requires a lot more computation. OOMM on 4A100s.
+/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ_text_gpt_25jan2025 - The code generated from GPT. It includes an extra attention block to implement cross attention between latent_states and text embedding, which requires a lot more computation. OOMM on 4A100s.
+/home/kai/phd/Video_Generation/git/gym_video_generation/pred/memo/memo - MEMO model. It implement cross attention between video and audio, also replace emb (time embedding) with emotion class. 
+```
