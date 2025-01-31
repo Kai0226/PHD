@@ -577,7 +577,7 @@ class ReferenceAttentionControl:
 - Ensure that `get_attention_maps()` returns the collected attention maps in the format you need. This could be a list of tensors, a dictionary keyed by layer, etc.
 
 With these changes, after running inference, you will not only have the generated video but also the captured latent attention maps from each layer of the diffusion blocks.
-```
+
 
 # Calisthenic Video Generation Model
 ```
