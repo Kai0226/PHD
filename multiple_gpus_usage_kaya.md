@@ -12,6 +12,7 @@ GCC >= 9 (you already loaded or installed GCC 12.4.0)
 GPU Driver: 550.54.14, which supports CUDA 12.4 on A100
 ```
 ```
+(conda create -n salix-ai python=3.10)
 
 conda create -p /group/pmc015/kniu/kai_phd/conda_env/champ_text python=3.10
 
