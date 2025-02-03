@@ -21,6 +21,7 @@ conda search -c conda-forge pytorch
 conda search -c conda-forge tensorflow
 
 conda install "conda-forge/linux-64::pytorch 2.1.2 cuda120_py310h327d3bc_301"
+(conda install "conda-forge/linux-64::pytorch 2.4.1 cuda120_py310h5d94b2e_301") - deepseek
 
 conda install "conda-forge/linux-64::tensorflow 2.16.1 cuda120py310hfaee7bf_0"
 
