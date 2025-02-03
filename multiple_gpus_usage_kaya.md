@@ -18,6 +18,7 @@ conda create -p /group/pmc015/kniu/kai_phd/conda_env/champ_text python=3.10
 chmod -R 775 /group/pmc015/kniu/kai_phd/conda_env/champ_text/bin/
 
 conda search -c conda-forge pytorch
+conda search -c conda-forge pytorch=2.3.1 
 conda search -c conda-forge tensorflow
 
 conda install "conda-forge/linux-64::pytorch 2.1.2 cuda120_py310h327d3bc_301"
