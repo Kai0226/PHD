@@ -18,6 +18,10 @@ conda create -p /group/pmc015/kniu/kai_phd/conda_env/champ_text python=3.10
 
 chmod -R 775 /group/pmc015/kniu/kai_phd/conda_env/champ_text/bin/
 
+conda activate ..
+
+salloc -p pophealth --time=5-00:00:00 --mem=40G -n 8 --gres=gpu:a100:1 --ntasks 10
+
 conda search -c conda-forge pytorch
 conda search -c conda-forge pytorch=2.3.1 
 conda search -c conda-forge tensorflow
