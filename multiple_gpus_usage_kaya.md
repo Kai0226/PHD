@@ -33,6 +33,7 @@ conda install "conda-forge/linux-64::pytorch 2.1.2 cuda120_py310h327d3bc_301"
 (conda install "conda-forge/linux-64::pytorch 2.5.1 cuda126_generic_py310_h478e78a_207") - qwen_rl
 (pip uninstall -y torch torchvision) - qwen_rl
 (pip install "torch==2.5.1" "setuptools<71.0.0"  --index-url https://download.pytorch.org/whl/cu124) - qwen_rl
+(https://www.philschmid.de/mini-deepseek-r1)
 
 conda install "conda-forge/linux-64::tensorflow 2.16.1 cuda120py310hfaee7bf_0"
 
