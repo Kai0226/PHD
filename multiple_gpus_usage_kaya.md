@@ -27,8 +27,10 @@ conda search -c conda-forge pytorch=2.3.1
 conda search -c conda-forge tensorflow
 
 conda install "conda-forge/linux-64::pytorch 2.1.2 cuda120_py310h327d3bc_301"
+(module load cuda/12.0)
 (conda install "conda-forge/linux-64::pytorch 2.4.1 cuda120_py310h5d94b2e_301") - deepseek
-
+(module load cuda/12.4)
+(conda install "conda-forge/linux-64::pytorch 2.5.1 cuda126_generic_py310_h478e78a_207") - qwen_rl 
 conda install "conda-forge/linux-64::tensorflow 2.16.1 cuda120py310hfaee7bf_0"
 
 pip uninstall -y torch torchvision
