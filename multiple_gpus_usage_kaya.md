@@ -604,3 +604,7 @@ With these changes, after running inference, you will not only have the generate
 /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ_text_gpt_25jan2025 - The code generated from GPT. It includes an extra attention block to implement cross attention between latent_states and text embedding, which requires a lot more computation. OOMM on 4A100s.
 /home/kai/phd/Video_Generation/git/gym_video_generation/pred/memo/memo - MEMO model. It implement cross attention between video and audio, also replace emb (time embedding) with emotion class. 
 ```
+
+```
+salloc -N 1 --time=01:00:00 --partition=gpu --mem=200G --gres=gpu:v100:2
+```
