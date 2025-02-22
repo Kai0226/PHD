@@ -608,3 +608,7 @@ With these changes, after running inference, you will not only have the generate
 ```
 salloc -N 1 --time=01:00:00 --partition=gpu --mem=200G --gres=gpu:v100:2
 ```
+
+Qwen2_VL_7B - vision vaptioning model training: /home/kai/phd/Video_Generation/git/gym_video_generation/Calisthenics/rl/instructed_fine-tuning/video_captioner/sft_qwen2_VL_7B2.py
+
+
