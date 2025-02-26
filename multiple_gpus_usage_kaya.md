@@ -617,4 +617,4 @@ Qwen2_VL_7B - vision vaptioning model training: /home/kai/phd/Video_Generation/g
 After 
  conda install "conda-forge/linux-64::pytorch 2.3.1 cuda118_py311h0047a46_300" 
 pip uninstall torch
-pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu118
+pip install torch==2.0.1 --index-url https://download.pytorch.org/whl/cu118
