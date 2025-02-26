@@ -614,6 +614,7 @@ Qwen2_VL_7B - vision vaptioning model training: /home/kai/phd/Video_Generation/g
 
 
 # when install zigma
+module load cuda/11.8
 After 
  conda install "conda-forge/linux-64::pytorch 2.3.1 cuda118_py311h0047a46_300" 
 pip uninstall torch
