@@ -18,3 +18,309 @@ https://github.com/Jiayi-Pan/TinyZero
 
 open source vision model:
 https://github.com/vikhyat/moondream
+
+
+# install MedSora
+
+```
+# Create a new environment with torch 2.0.0 and CUDA 11.7
+#conda create -n medsora_torch2 python=3.10 -y
+#conda activate medsora_torch2
+
+# Install PyTorch 2.0.0
+pip install torch==2.0.0 torchvision==0.15.0 --index-url https://download.pytorch.org/whl/cu117
+
+# Install other dependencies
+pip install triton==2.0.0
+pip install mamba-ssm
+pip install diffusers==0.18.0
+pip install transformers==4.30.0
+pip install accelerate==0.20.0
+pip install huggingface_hub==0.15.0
+pip install local-attention
+
+# Other dependencies you might need
+pip install einops timm opencv-python pillow tqdm pyyaml
+
+```
+
+modify autoencoders/autoencoder_kl_cogvidoex.py:
+```
+from typing import Optional, Tuple, Union
+
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+from diffusers.configuration_utils import ConfigMixin, register_to_config
+# Patch for compatibility with older diffusers
+try:
+    from diffusers.loaders.single_file_model import FromOriginalModelMixin
+except ImportError:
+    # Create a simple mock class
+    class FromOriginalModelMixin:
+        """Mock implementation for compatibility"""
+        @classmethod
+        def from_pretrained(cls, *args, **kwargs):
+            print(f"Warning: Using mock FromOriginalModelMixin")
+            return cls()
+from diffusers.utils import logging
+# Patch for compatibility with older diffusers
+try:
+    from diffusers.utils.accelerate_utils import apply_forward_hook
+except ImportError:
+    # Create a mock function
+    def apply_forward_hook(*args, **kwargs):
+        print("Warning: Using mock apply_forward_hook")
+        return args[0]  # Return the model unchanged
+# Patch for compatibility with older diffusers
+try:
+    from diffusers.models.activations import get_activation
+except ImportError:
+    # Define a simple get_activation function
+    def get_activation(activation_str):
+        import torch.nn as nn
+        activations = {
+            "swish": nn.SiLU(),
+            "silu": nn.SiLU(),
+            "mish": nn.Mish(),
+            "gelu": nn.GELU(),
+            "relu": nn.ReLU(),
+        }
+        return activations.get(activation_str.lower(), nn.SiLU())
+# Create a mock CogVideoXDownsample3D class
+import torch.nn as nn
+class CogVideoXDownsample3D(nn.Module):
+    """Mock implementation of CogVideoXDownsample3D for compatibility"""
+    def __init__(self, channels, use_conv=False, padding=1, name="down"):
+        super().__init__()
+        self.channels = channels
+        self.use_conv = use_conv
+        self.padding = padding
+        self.name = name
+        
+        if use_conv:
+            # Create a 3D convolutional layer for downsampling
+            self.conv = nn.Conv3d(
+                channels, channels, kernel_size=3, stride=2, padding=padding
+            )
+        
+    def forward(self, x):
+        if self.use_conv:
+            return self.conv(x)
+        else:
+            # Simple average pooling if not using convolution
+            return nn.functional.avg_pool3d(x, kernel_size=2, stride=2, padding=0)
+# Create a mock AutoencoderKLOutput class
+class AutoencoderKLOutput:
+    """Mock implementation of AutoencoderKLOutput for compatibility"""
+    def __init__(self, sample=None, latent_dist=None):
+        self.sample = sample
+        self.latent_dist = latent_dist
+from diffusers.models.modeling_utils import ModelMixin
+# Create a mock CogVideoXUpsample3D class
+import torch.nn as nn
+class CogVideoXUpsample3D(nn.Module):
+    """Mock implementation of CogVideoXUpsample3D for compatibility"""
+    def __init__(self, channels, use_conv=False, padding=1):
+        super().__init__()
+        self.channels = channels
+        self.use_conv = use_conv
+        self.padding = padding
+        
+        if use_conv:
+            # Create a 3D convolutional layer for upsampling
+            self.conv = nn.Conv3d(
+                channels, channels, kernel_size=3, stride=1, padding=padding
+            )
+        
+    def forward(self, x):
+        # Simple bilinear upsampling
+        x = nn.functional.interpolate(x, scale_factor=2.0, mode="trilinear", align_corners=False)
+        if self.use_conv:
+            return self.conv(x)
+        return x
+from .vae import DecoderOutput, DiagonalGaussianDistribution
+
+
+logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
+
+
+class CogVideoXSafeConv3d(nn.Conv3d):
+    r"""
+    A 3D convolution layer that splits the input tensor into smaller parts to avoid OOM in CogVideoX Model.
+    """
+
+```
+Add autoencoders/diffuser_mock.py
+```
+"""
+Mock implementations of diffusers components needed by MedSora
+"""
+import torch
+import torch.nn as nn
+from dataclasses import dataclass
+
+
+# Mock BaseOutput
+@dataclass
+class BaseOutput:
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
+
+# Mock utility functions
+def is_torch_version(*args, **kwargs):
+    return True
+
+
+def randn_tensor(*args, **kwargs):
+    return torch.randn(*args[1:], **kwargs)
+
+
+# Mock activation function
+def get_activation(activation_str):
+    activations = {
+        "swish": nn.SiLU(),
+        "silu": nn.SiLU(),
+        "mish": nn.Mish(),
+        "gelu": nn.GELU(),
+        "relu": nn.ReLU(),
+    }
+    return activations.get(activation_str.lower(), nn.SiLU())
+
+
+# Mock SpatialNorm
+class SpatialNorm(nn.Module):
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        self.norm = nn.LayerNorm(kwargs.get("f_channels", 64))
+
+    def forward(self, x):
+        return self.norm(x)
+
+
+# Mock UNet blocks
+class AutoencoderTinyBlock(nn.Module):
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        in_channels = kwargs.get("in_channels", 64)
+        out_channels = kwargs.get("out_channels", 64)
+        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1)
+
+    def forward(self, x):
+        return self.conv(x)
+
+
+class UNetMidBlock2D(nn.Module):
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        in_channels = kwargs.get("in_channels", 64)
+        out_channels = kwargs.get("out_channels", in_channels)
+        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1)
+
+    def forward(self, x, **kwargs):
+        return self.conv(x)
+
+
+# Mock get_down_block and get_up_block functions
+def get_down_block(*args, **kwargs):
+    class DownBlock(nn.Module):
+        def __init__(self):
+            super().__init__()
+            in_channels = kwargs.get("in_channels", 64)
+            out_channels = kwargs.get("out_channels", in_channels * 2)
+            self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=2, padding=1)
+
+        def forward(self, x, **kwargs):
+            return self.conv(x)
+
+    return DownBlock()
+
+
+def get_up_block(*args, **kwargs):
+    class UpBlock(nn.Module):
+        def __init__(self):
+            super().__init__()
+            in_channels = kwargs.get("in_channels", 64)
+            out_channels = kwargs.get("out_channels", in_channels // 2)
+            self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1)
+
+        def forward(self, x, **kwargs):
+            # Simple bilinear upsampling
+            x = nn.functional.interpolate(x, scale_factor=2.0, mode="bilinear", align_corners=False)
+            return self.conv(x)
+
+    return UpBlock()
+```
+Modify autoencoders/vae.py
+```
+
+import numpy as np
+import torch
+import torch.nn as nn
+
+# Import our mock implementations
+from .diffuser_mock import (
+    BaseOutput, is_torch_version, randn_tensor,
+    get_activation, SpatialNorm,
+    AutoencoderTinyBlock, UNetMidBlock2D,
+    get_down_block, get_up_block
+)
+
+@dataclass
+class DecoderOutput(BaseOutput):
+    r"""
+    Output of decoding method.
+
+    Args:
+        sample (`torch.Tensor` of shape `(batch_size, num_channels, height, width)`):
+            The decoded output sample from the last layer of the model.
+    """
+
+```
+
+Modify sample.py
+```
+
+def main(config, args):
+    # Setup PyTorch:
+    torch.manual_seed(config.global_seed)
+    torch.set_grad_enabled(False)
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(device)
+    # dist.init_process_group("nccl")
+    if torch.cuda.is_available():
+        dist.init_process_group("nccl")
+    else:
+        print("Running in CPU mode - skipping distributed setup")
+        # You might need to set some variables that would normally be set by the dist module
+        args.local_rank = 0
+
+    # Load model:
+    latent_size = config.image_size // 8
+    model = MedSora_models[args.model](
+        in_channels=16,
+        latent_num_frames=4,
+        latent_num_all=6,
+        input_size=latent_size,
+        dt_rank=config.dt_rank,
+        d_state=config.d_state,
+        use_image_num = config.use_image_num,
+        use_covariance=config.use_covariance,
+        use_local_attention=config.use_local_attention,
+        use_local_cov=args.use_local_cov,
+    ).to(device)
+```
+
+```
+bash env_install4.sh
+pip install torchmetrics
+pip install omegaconf
+pip install imageio
+pip install lpips
+ pip install wcwidth
+ pip install triton==3.0.0 --no-deps
+```
