@@ -323,4 +323,7 @@ pip install imageio
 pip install lpips
  pip install wcwidth
  pip install triton==3.0.0 --no-deps
+pip install loguru
+ pip install decord
+
 ```
