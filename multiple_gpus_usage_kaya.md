@@ -619,3 +619,20 @@ After
  conda install "conda-forge/linux-64::pytorch 2.3.1 cuda118_py311h0047a46_300" 
 pip uninstall torch
 pip install torch==2.0.1 --index-url https://download.pytorch.org/whl/cu118
+
+# Finetuning LLM
+```
+
+step1_SFT: /home/kai/phd/Video_Generation/git/gym_video_generation/Calisthenics/rl/instructed_fine-tuning/textualized_keypoints_generator/stf_step1.py
+step2_SFT: /home/kai/phd/Video_Generation/git/gym_video_generation/Calisthenics/rl/instructed_fine-tuning/textualized_keypoints_generator/stf_step2.py
+
+step1_GRPO: /home/kai/phd/Video_Generation/git/gym_video_generation/Calisthenics/rl/finetune_grpo_step1.py
+step1_GRPO_reasoning: /home/kai/phd/Video_Generation/git/gym_video_generation/Calisthenics/rl/finetune_grpo_step1_reasoning.py
+step2_GRPP: /home/kai/phd/Video_Generation/git/gym_video_generation/Calisthenics/rl/finetune_grpo_step2.py
+reward function: /home/kai/phd/Video_Generation/git/gym_video_generation/Calisthenics/rl/verify_reward_function7.py
+*** the weigths for keypoint correctness and keypoint name need to be change, which is to small for step1 (only 1 frame)
+
+SFT LLM models: /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generation/models/sft_llm
+GRPO LLM Models: /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generation/models/grpo_llm
+'/group/pmc015/kniu/kai_phd/Video-Generation/Calisthenics/rl/models' in Kaya
+```
