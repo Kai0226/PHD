@@ -638,3 +638,11 @@ GRPO LLM Models: /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generatio
 ```
 
 du -sh */
+
+# How to git add Champ
+```
+git add Champ
+git rm -r --cached Champ_new/mmpose/
+git rm -r --cached Champ_new/detectron2/
+git rm -r --cached Champ_new/driving_videos/
+```
