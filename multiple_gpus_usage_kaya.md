@@ -636,3 +636,5 @@ SFT LLM models: /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generation
 GRPO LLM Models: /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generation/models/grpo_llm
 '/group/pmc015/kniu/kai_phd/Video-Generation/Calisthenics/rl/models' in Kaya
 ```
+
+du -sh */
