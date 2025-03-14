@@ -645,4 +645,5 @@ git add Champ
 git rm -r --cached Champ_new/mmpose/
 git rm -r --cached Champ_new/detectron2/
 git rm -r --cached Champ_new/driving_videos/
+git rm -r --cached Champ_new/runwayml/
 ```
