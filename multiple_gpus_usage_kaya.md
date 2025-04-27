@@ -677,3 +677,10 @@ https://github.com/Kai0226/Video-Generation/tree/main/third_party
 7. 'results' folder has not been sync to local PC yet.
 
 8. 
+
+# Notes - 28/04/25
+Attention injection --
+1. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/attention_injection/compute_attention2.py
+2. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/attention_injection/classify_attention2.py
+3. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/attention_injection/train_attention_correction2.py   --  the model didn't get trained well, overfit too quick
+4. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/attention_injection/inject_attention.py   --  haven't tested this code yet.
