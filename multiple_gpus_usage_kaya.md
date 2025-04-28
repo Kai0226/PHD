@@ -684,3 +684,5 @@ Attention injection --
 2. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/attention_injection/classify_attention2.py
 3. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/attention_injection/train_attention_correction2.py   --  the model didn't get trained well, overfit too quick
 4. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/attention_injection/inject_attention.py   --  haven't tested this code yet.
+
+5. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/visualize_attention/guidance_attention7_sapiens3.py  -- CHAMP model attention visualization analysis
