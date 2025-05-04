@@ -676,7 +676,6 @@ https://github.com/Kai0226/Video-Generation/tree/main/third_party
 
 7. 'results' folder has not been sync to local PC yet.
 
-8. 
 
 # Notes - 28/04/25
 Attention injection --
@@ -686,3 +685,10 @@ Attention injection --
 4. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/attention_injection/inject_attention.py   --  haven't tested this code yet.
 
 5. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/visualize_attention/guidance_attention7_sapiens3.py  -- CHAMP model attention visualization analysis
+
+
+# Notes - 05/05/25
+TikTok dataset (300 video clips) - attention evaluation
+process multimodal conditions: /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/process_video_new_run_champ_v2_tiktok.py
+run inference: python /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/main_new_new_tiktok_dataset.py --run_type inference_champ
+
