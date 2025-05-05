@@ -687,6 +687,11 @@ Attention injection --
 5. /home/kai/phd/Video_Generation/git/gym_video_generation/pred/Champ/phd/visualize_attention/guidance_attention7_sapiens3.py  -- CHAMP model attention visualization analysis
 
 
+# Mount IDRS into local pc
+```
+sudo mount -t cifs //store.irds.uwa.edu.au/res-pmc-vg202408-p000528 /mnt/irds -o username=24188946,domain=UNIWA
+```
+
 # Notes - 05/05/25
 TikTok dataset (300 video clips) - attention evaluation
 process multimodal conditions: /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/process_video_new_run_champ_v2_tiktok.py
