@@ -695,6 +695,8 @@ run inference: python /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Ch
 
 # Mount IDRS into local pc
 ```
+smb://store.irds.uwa.edu.au
+
 sudo mount -t cifs //store.irds.uwa.edu.au/res-pmc-vg202408-p000528 /mnt/irds -o username=24188946,domain=UNIWA
 
 sudo rsync -avh --progress /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generation/output/youtube_new/Champ_new/ /mnt/irds/calisthenic/Champ_new/
