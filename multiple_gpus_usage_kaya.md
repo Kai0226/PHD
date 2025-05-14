@@ -696,6 +696,7 @@ run inference: python /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Ch
 # Mount IDRS into local pc
 ```
 smb://store.irds.uwa.edu.au
+UNIWA
 24188946
 
 sudo mount -t cifs //store.irds.uwa.edu.au/res-pmc-vg202408-p000528 /mnt/irds -o username=24188946,domain=UNIWA
