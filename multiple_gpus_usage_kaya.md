@@ -708,3 +708,26 @@ sudo rsync -avh --progress /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video
 # Update 07-May-2025
 The current CHAMP dir in Kaya: /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ  is the code for running inference on TikTok video dataset including 340 vidoe clips. In this codebase, it also includes guidance fusion module (added cross attention to fuse multimodal guidance) in "/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/models/champ_model_guidance_fusion.py"
 
+# Sapiens env install
+
+sapiens env:
+
+
+cuda - 12.1
+mmcv - 2.1.0
+
+mmpose - 1.0.0
+
+python - Python 3.10.14
+ mediapipe - 0.10.18
+
+  - package mmcv-2.1.0-cuda120py310h7e5e4a0_203 requires pytorch >=2.1.0,<2.2.0a0, but none of the providers can be installed
+ 
+```
+conda install "conda-forge/linux-64::pytorch 2.1.0 cuda120_py310h8a81058_302"
+conda install "conda-forge/linux-64::mmcv 2.1.0 cuda120py310h7e5e4a0_203"
+conda install -c pytorch -c conda-forge torchvision=0.16.0 --no-update-deps
+conda install -c pytorch -c conda-forge torchaudio=2.1.0 --no-update-deps
+pip install opencv-python tqdm json-tricks
+pip install mmpose==1.0.0
+pip install mediapipe==0.10.18
