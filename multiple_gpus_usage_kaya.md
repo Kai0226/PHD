@@ -731,3 +731,14 @@ conda install -c pytorch -c conda-forge torchaudio=2.1.0 --no-update-deps
 pip install opencv-python tqdm json-tricks
 pip install mmpose==1.0.0
 pip install mediapipe==0.10.18
+
+
+(Optional but recommended)
+Ensure your PATH and LD_LIBRARY_PATH include CUDA:
+   export PATH=/uwahpc/local/cuda-12.0/bin:$PATH
+   export LD_LIBRARY_PATH=/uwahpc/local/cuda-12.0/lib64:$LD_LIBRARY_PATH
+
+Install your packages:
+   pip install mmcv==2.1.0 mmdet==3.3.0 mmpose==1.0.0
+
+
