@@ -703,6 +703,10 @@ sudo mount -t cifs //store.irds.uwa.edu.au/res-pmc-vg202408-p000528 /mnt/irds -o
 
 sudo rsync -avh --progress /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generation/output/youtube_new/Champ_new/ /mnt/irds/calisthenic/Champ_new/
 ```
+transfering data from aws s3 to IRDS
+```
+sudo -E aws s3 sync s3://video-generation-calisthenics/train/output/ /mnt/irds/calisthenic/Champ_new/output/
+```
 
 
 # Update 07-May-2025
