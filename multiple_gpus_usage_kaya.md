@@ -708,6 +708,14 @@ transfering data from aws s3 to IRDS
 sudo -E aws s3 sync s3://video-generation-calisthenics/train/output/ /mnt/irds/calisthenic/Champ_new/output/
 ```
 
+If you Input/Output error or Hose is down: 
+```
+sudo umount /mnt/irds
+
+sudo mount -t cifs //store.irds.uwa.edu.au/res-pmc-vg202408-p000528 /mnt/irds -o username=24188946,domain=UNIWA,iocharset=utf8,rw,nounix,noserverino,vers=3.1.1,hard,intr,actimeo=30
+
+sudo rsync -avh --progress --inplace --partial --append-verify /media/kai/f4b6c365-d543-4751-877a-3b5a123ac025/video_generation/output/youtube_new/Champ_new/output/ /mnt/irds/calisthenic/Champ_new/output/
+```
 
 # Update 07-May-2025
 The current CHAMP dir in Kaya: /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ  is the code for running inference on TikTok video dataset including 340 vidoe clips. In this codebase, it also includes guidance fusion module (added cross attention to fuse multimodal guidance) in "/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/models/champ_model_guidance_fusion.py"
