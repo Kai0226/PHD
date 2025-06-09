@@ -778,11 +778,12 @@ Install your packages:
 
 # The last upblock layer attention extraction
 ```
-cd /group/pmc015/kniu/kai_phd/Video-Generation/Calisthenics/attention_investigation
+cd /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/slurm
+sbatch /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/slurm/extract_attention.slurm
+ -- which use "inference_extract_attention_tiktok4.py"
 
-python attention_explorer_new.py --attention_dir "/group/pmc015/kniu/kai_phd/Video-Generation/tiktok_output/attention_tiktok_dataset_generated_video_depth_normal_semantic_map_dwpose_champ/attention_maps" --video_name "00002-exp-2025-05-30T14-56-25" --max_frames 50 --device cuda
-
-python attention_analysis2.py
+python /group/pmc015/kniu/kai_phd/Video-Generation/Calisthenics/attention_investigation/attention_analysis5.py
+ -- for analysis
 ```
 # Visualize attention
 ```
