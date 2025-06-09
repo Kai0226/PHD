@@ -722,6 +722,23 @@ sudo rsync -avh --progress --partial --partial-dir=.rsync-partial --timeout=1800
 
 ```
 
+# Kaya to IRDS
+```
+cd /home/shared/gio_mount_irds
+dbus-run-session -- bash
+./mount_irds.sh
+
+it-h-001
+24188946
+
+source ~/.irds_it-h-001.conf
+echo $MYIRDS
+
+/run/user/11030/gvfs/smb-share:server=drive.irds.uwa.edu.au,share=it-h-001
+
+```
+
+
 # Update 07-May-2025
 The current CHAMP dir in Kaya: /group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ  is the code for running inference on TikTok video dataset including 340 vidoe clips. In this codebase, it also includes guidance fusion module (added cross attention to fuse multimodal guidance) in "/group/pmc015/kniu/kai_phd/Video-Generation/third_party/Champ/models/champ_model_guidance_fusion.py"
 
