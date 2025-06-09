@@ -774,5 +774,45 @@ Ensure your PATH and LD_LIBRARY_PATH include CUDA:
 
 Install your packages:
    pip install mmcv==2.1.0 mmdet==3.3.0 mmpose==1.0.0
+```
+
+# The last upblock layer attention extraction
+```
+cd /group/pmc015/kniu/kai_phd/Video-Generation/Calisthenics/attention_investigation
+
+python attention_explorer_new.py --attention_dir "/group/pmc015/kniu/kai_phd/Video-Generation/tiktok_output/attention_tiktok_dataset_generated_video_depth_normal_semantic_map_dwpose_champ/attention_maps" --video_name "00002-exp-2025-05-30T14-56-25" --max_frames 50 --device cuda
+
+python attention_analysis2.py
+```
+# Visualize attention
+```
+cd /group/pmc015/kniu/kai_phd/Video-Generation/Calisthenics/attention_investigation/attention_visialization/attention_visualizations
+
+# Single video analysis
+python champ_attention_visualizer.py --attention_dir /path/to/attention_maps --video_name 00001
+
+# Batch processing multiple videos
+python champ_attention_visualizer.py --attention_dir /path/to/attention_maps --batch --video_list 00001 00002 00003
+
+# Limit frames for faster processing
+python champ_attention_visualizer.py --attention_dir /path/to/attention_maps --video_name 00001 --max_frames 30
 
 
+# Quality analysis for single video
+python advanced_attention_analysis.py --attention_dir /path/to/attention_maps --video_name 00001 --analysis_type quality
+
+# Hotspot analysis
+python advanced_attention_analysis.py --attention_dir /path/to/attention_maps --video_name 00001 --analysis_type hotspots
+
+# Compare multiple videos
+python advanced_attention_analysis.py --attention_dir /path/to/attention_maps --video_list 00001 00002 00003 --analysis_type comparison
+
+# Full analysis suite
+python advanced_attention_analysis.py --attention_dir /path/to/attention_maps --video_name 00001 --analysis_type all
+
+# Interactive exploration
+python interactive_attention_explorer.py --attention_dir /path/to/attention_maps --video_name 00001 --mode explore
+
+# Create summary dashboard
+python interactive_attention_explorer.py --attention_dir /path/to/attention_maps --video_list 00001 00002 00003 --mode dashboard
+```
