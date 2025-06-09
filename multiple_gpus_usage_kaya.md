@@ -724,17 +724,17 @@ sudo rsync -avh --progress --partial --partial-dir=.rsync-partial --timeout=1800
 
 # Kaya to IRDS
 ```
-cd /home/shared/gio_mount_irds
+cd gio_mount_irds/
 dbus-run-session -- bash
 ./mount_irds.sh
 
-it-h-001
+RES-PMC-VG202408-P000528
 24188946
 
-source ~/.irds_it-h-001.conf
+source ~/.irds_RES-PMC-VG202408-P000528.conf
 echo $MYIRDS
 
-/run/user/11030/gvfs/smb-share:server=drive.irds.uwa.edu.au,share=it-h-001
+/run/user/11030/gvfs/smb-share:server=store.irds.uwa.edu.au,share=res-pmc-vg202408-p000528
 
 ```
 
