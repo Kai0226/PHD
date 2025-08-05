@@ -817,3 +817,8 @@ python interactive_attention_explorer.py --attention_dir /path/to/attention_maps
 # Create summary dashboard
 python interactive_attention_explorer.py --attention_dir /path/to/attention_maps --video_list 00001 00002 00003 --mode dashboard
 ```
+
+
+```
+salloc -N 1 --time=01:00:00 --partition=data-inst --mem=200G --gres=gpu:h100:2
+```
