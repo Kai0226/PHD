@@ -824,6 +824,10 @@ salloc -N 1 --time=01:00:00 --partition=data-inst --mem=200G --gres=gpu:h100:2
 ```
 
 ```
+salloc -p data-inst --gres=gpu:h100:1
+```
+
+```
 #!/usr/bin/env bash
 #SBATCH --job-name=inference_video_clips
 #SBATCH --output=/group/pmc015/kniu/Wan2GP/slurm/inference_video_clips.txt
