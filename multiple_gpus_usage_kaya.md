@@ -822,3 +822,43 @@ python interactive_attention_explorer.py --attention_dir /path/to/attention_maps
 ```
 salloc -N 1 --time=01:00:00 --partition=data-inst --mem=200G --gres=gpu:h100:2
 ```
+
+```
+#!/usr/bin/env bash
+#SBATCH --job-name=inference_video_clips
+#SBATCH --output=/group/pmc015/kniu/Wan2GP/slurm/inference_video_clips.txt
+#SBATCH --nodes=1
+#SBATCH --time=4-00:00:00
+#SBATCH --partition=data-inst
+#SBATCH --mem=200G
+#SBATCH --gres=gpu:h100:1
+
+# 1) load any system modules you need
+module load cuda/12.4
+module load gcc/12.4.0
+
+# --- force a safe threading setup for ONNX Runtime ---
+export OMP_NUM_THREADS=8        # match the number of CPUs you requested
+export MKL_NUM_THREADS=8
+export KMP_AFFINITY=none
+
+# 2) source the conda setup script so `conda activate` works
+#    adjust this path to match your HPC’s Anaconda installation
+source /uwahpc/centos8/python/Anaconda3/2024.06/etc/profile.d/conda.sh
+
+# 3) now activate your env
+conda activate wan2gp
+
+# pick the N-th prompt from a text file with one prompt per line
+PROMPT=$(sed -n "$((SLURM_ARRAY_TASK_ID+1))p" prompts.txt)
+
+python i2v_inference.py \
+  --prompt "$PROMPT" \
+  --output-file /group/pmc015/kniu/Wan2GP/outputs/out_${SLURM_ARRAY_TASK_ID}.mp4 \
+  --resolution 1280x720 \
+  --frames 97 \            # ≈6 s @16 fps (4·n+1 rule handled inside)
+  --steps 30 \
+  --guidance-scale 5.0 \
+  --flow-shift 5.0         # good default for 720 p
+
+```
