@@ -830,9 +830,9 @@ salloc -p data-inst --gres=gpu:h100:1
 ```
 #!/usr/bin/env bash
 #SBATCH --job-name=inference_video_clips
-#SBATCH --output=/group/pmc015/kniu/Wan2GP/slurm/inference_video_clips.txt
+#SBATCH --output=/group/pmc015/kniu/video_clips/Wan2.2/slurm/inference_video_clips.txt
 #SBATCH --nodes=1
-#SBATCH --time=4-00:00:00
+#SBATCH --time=1-00:00:00
 #SBATCH --partition=data-inst
 #SBATCH --mem=200G
 #SBATCH --gres=gpu:h100:1
@@ -848,21 +848,25 @@ export KMP_AFFINITY=none
 
 # 2) source the conda setup script so `conda activate` works
 #    adjust this path to match your HPC’s Anaconda installation
-source /uwahpc/centos8/python/Anaconda3/2024.06/etc/profile.d/conda.sh
-
-# 3) now activate your env
+eval "$(conda shell.bash hook)"
 conda activate wan2gp
+
+cd "/group/pmc015/kniu/video_clips/Wan2.2"
 
 # pick the N-th prompt from a text file with one prompt per line
 PROMPT=$(sed -n "$((SLURM_ARRAY_TASK_ID+1))p" prompts.txt)
 
-python i2v_inference.py \
+python generate.py \
+  --task t2v-A14B \
+  --size 1280*720 \
+  --frame_num 97 \
+  --ckpt_dir ./Wan2.2-T2V-A14B \
+  --offload_model True \
+  --convert_model_dtype \
   --prompt "$PROMPT" \
-  --output-file /group/pmc015/kniu/Wan2GP/outputs/out_${SLURM_ARRAY_TASK_ID}.mp4 \
-  --resolution 1280x720 \
-  --frames 97 \            # ≈6 s @16 fps (4·n+1 rule handled inside)
-  --steps 30 \
-  --guidance-scale 5.0 \
-  --flow-shift 5.0         # good default for 720 p
+  --sample_steps 30 \
+  --sample_shift 5.0 \
+  --sample_guide_scale 5.0 \
+
 
 ```
