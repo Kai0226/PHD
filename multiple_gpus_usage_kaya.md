@@ -870,3 +870,8 @@ python generate.py \
 
 
 ```
+
+```
+tail -f inference_video_clips.3927_{0..3}.txt
+
+```
