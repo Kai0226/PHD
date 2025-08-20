@@ -875,3 +875,79 @@ python generate.py \
 tail -f inference_video_clips.3927_{0..3}.txt
 
 ```
+
+```
+(/group/pmc015/kniu/kai_phd/conda_env/wan) bash-5.1$ python try_i2v.py /group/pmc015/kniu/video_clips/Wan2GP/manifest.jsonl /group/pmc015/kniu/video_clips/Wan2GP/output/video1
+/group/pmc015/kniu/kai_phd/conda_env/wan/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████| 12/12 [01:11<00:00,  6.00s/it]
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████| 12/12 [01:12<00:00,  6.01s/it]
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 3/3 [00:02<00:00,  1.42it/s]
+Loading pipeline components...: 100%|██████████████████████████████████████████████████████| 6/6 [02:28<00:00, 24.78s/it]
+100%|████████████████████████████████████████████████████████████████████████████████████| 50/50 [42:39<00:00, 51.20s/it]
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+        - Avoid using `tokenizers` before the fork if possible
+        - Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[1/1] wrote /group/pmc015/kniu/video_clips/Wan2GP/output/video1/a.mp4
+(/group/pmc015/kniu/kai_phd/conda_env/wan) bash-5.1$ squeue -u kniu 6718
+squeue: error: Unrecognized option: 6718
+Usage: squeue [-A account] [--clusters names] [-i seconds] [--job jobid]
+              [-n name] [-o format] [--only-job-state] [-p partitions]
+              [--qos qos] [--reservation reservation] [--sort fields] [--start]
+              [--step step_id] [-t states] [-u user_name] [--usage]
+              [-L licenses] [-w nodes] [--federation] [--local] [--sibling]
+              [--expand-patterns] [--json=data_parser] [--yaml=data_parser]
+              [-ahjlrsv]
+(/group/pmc015/kniu/kai_phd/conda_env/wan) bash-5.1$ exit
+exit
+srun: error: k179: task 0: Exited with exit code 1
+salloc: Relinquishing job allocation 6718
+salloc: Job allocation 6718 has been revoked.
+(/group/pmc015/kniu/kai_phd/conda_env/wan) kniu@kaya01[video_clips]$ salloc -p data-inst --gres=gpu:h100:1
+salloc: Granted job allocation 6953
+salloc: Nodes k179 are ready for job
+(base) bash-5.1$ conda activate wan
+(/group/pmc015/kniu/kai_phd/conda_env/wan) bash-5.1$ pwd
+/group/pmc015/kniu/video_clips
+(/group/pmc015/kniu/kai_phd/conda_env/wan) bash-5.1$ ls
+Wan2.2  Wan2GP
+(/group/pmc015/kniu/kai_phd/conda_env/wan) bash-5.1$ cd Wan2GP/
+(/group/pmc015/kniu/kai_phd/conda_env/wan) bash-5.1$ python infer_t2i2v_wan2gp.py \
+  --prompt "neon jungle dreamscape 01 — bioluminescent vines, fractal mushrooms pulsing to 174 BPM, magenta-cyan haze, cinematic drone glide, 16:9 720p" \
+  --image_out "/group/pmc015/kniu/video_clips/Wan2GP/test_images" \
+  --video_out "/group/pmc015/kniu/video_clips/Wan2GP/test_videos/test_video.mp4" \
+  --height 704 --width 1280 \
+  --frames 81 \
+  --fps 16 \
+  --guidance_scale 5.0 \
+  --steps 30 \
+  --flow_shift 5.0 \
+  --teacache 0.25 \
+  --seed 123
+/group/pmc015/kniu/kai_phd/conda_env/wan/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Loading pipeline components...:   0%|                                                              | 0/7 [00:00<?, ?it/s]You set `add_prefix_space`. The tokenizer needs to be converted from the slow tokenizers
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 2/2 [00:01<00:00,  1.20it/s]
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 3/3 [00:09<00:00,  3.25s/it]
+Loading pipeline components...: 100%|██████████████████████████████████████████████████████| 7/7 [00:12<00:00,  1.84s/it]
+[Flux] Generating 1280x704 image...
+100%|████████████████████████████████████████████████████████████████████████████████████| 28/28 [00:07<00:00,  3.97it/s]
+[INFO] Calling Wan2GP i2v_inference.py:
+  /group/pmc015/kniu/kai_phd/conda_env/wan/bin/python /mmfs1/data/group/pmc015/kniu/video_clips/Wan2GP/i2v_inference.py --prompt bioluminescent vines, fractal mushrooms pulsing to 174 BPM, magenta-cyan haze, cinematic drone glide, 16:9 720p --negative-prompt  --input-image /group/pmc015/kniu/video_clips/Wan2GP/test_images/neon_jungle_dreamscape_01.png --output-file /group/pmc015/kniu/video_clips/Wan2GP/test_videos/test_video.mp4 --resolution 1280x704 --frames 81 --steps 30 --guidance-scale 5.0 --flow-shift 5.0 --teacache 0.25 --seed 123
+/group/pmc015/kniu/kai_phd/conda_env/wan/lib/python3.10/site-packages/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 3/3 [00:02<00:00,  1.16it/s]
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████| 12/12 [01:12<00:00,  6.02s/it]
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████| 12/12 [01:11<00:00,  5.99s/it]
+Loading pipeline components...: 100%|██████████████████████████████████████████████████████| 6/6 [02:29<00:00, 24.87s/it]
+Traceback (most recent call last):
+  File "/mmfs1/data/group/pmc015/kniu/video_clips/Wan2GP/i2v_inference.py", line 50, in <module>
+    main(manifest_path, out_dir)
+  File "/mmfs1/data/group/pmc015/kniu/video_clips/Wan2GP/i2v_inference.py", line 19, in main
+    with open(manifest_path, "r", encoding="utf-8") as f:
+FileNotFoundError: [Errno 2] No such file or directory: '--prompt'
+[ERROR] i2v_inference.py failed (exit 1)
+(/group/pmc015/kniu/kai_phd/conda_env/wan) bash-5.1$ 
+
+```
