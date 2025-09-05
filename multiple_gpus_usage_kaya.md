@@ -951,3 +951,55 @@ FileNotFoundError: [Errno 2] No such file or directory: '--prompt'
 (/group/pmc015/kniu/kai_phd/conda_env/wan) bash-5.1$ 
 
 ```
+
+
+```
+# paths (adjust if needed)
+LORADIR="/group/pmc015/kniu/video_clips/t2i2v_lora/wan2.2"
+GGUF_HIGH="$LORADIR/wan22I2VA14BGGUF_a14bHigh.gguf"
+
+
+python t2i2v.py \
+  --prompt "Key — neon jungle dreamscape" \
+  --negative_prompt "" \
+  --image_out /group/pmc015/kniu/video_clips/t2i2v_lora/seed.png \
+  --video_out /group/pmc015/kniu/video_clips/t2i2v_lora/seed.mp4 \
+  --t2i-backend flux \
+  --flux_model black-forest-labs/FLUX.1-Krea-dev \
+  --flux_steps 28 \
+  --flux_guidance 3.5 \
+  --frames 81 \
+  --steps 30 \
+  --guidance_scale 5.0 \
+  --seed 42 \
+  --resolution 1280x704 \
+  --transformer_gguf_high /group/pmc015/kniu/video_clips/t2i2v_lora/wan2.2/wan22I2VA14BGGUF_a14bHigh.gguf \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/wan2.2/NSFW-22-H-e8.safetensors@0.8 \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/wan2.2/Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1_high_noise_model.safetensors@1.0
+
+python i2v_inference.py \
+  --prompt "neon jungle dreamscape" \
+  --input-image /group/pmc015/kniu/video_clips/t2i2v_lora/seed.png \
+  --output-file /group/pmc015/kniu/video_clips/t2i2v_lora/seed.mp4 \
+  --resolution 1280x704 \
+  --frames 81 \
+  --steps 30 \
+  --guidance-scale 5.0 \
+  --seed 42 \
+  --transformer_gguf_high /group/pmc015/kniu/video_clips/t2i2v_lora/wan2.2/wan22I2VA14BGGUF_a14bHigh.gguf \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/wan2.2/NSFW-22-H-e8.safetensors@0.8 \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/wan2.2/Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1_high_noise_model.safetensors@1.0
+
+```
+
+```
+DEST="/group/pmc015/kniu/video_clips/checkpoints"
+URL='https://civitai.com/api/download/models/2091367?type=Model&format=SafeTensor&size=pruned&fp=fp16'
+FN='realismIllustriousBy_v50FP16.safetensors'   # choose the final name you want
+
+mkdir -p "$DEST" && cd "$DEST"
+
+# Follow redirects (-L), save as FN (-o), optional retries
+curl -L --retry 5 --retry-connrefused -o "$FN" "$URL"
+
+```
