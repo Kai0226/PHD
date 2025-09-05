@@ -1002,4 +1002,53 @@ mkdir -p "$DEST" && cd "$DEST"
 # Follow redirects (-L), save as FN (-o), optional retries
 curl -L --retry 5 --retry-connrefused -o "$FN" "$URL"
 
+
+```
+
+
+```
+python t2i2v.py \
+  --t2i-backend wan \
+  --wan_t2i_model Wan-AI/Wan2.2-T2V-A14B-Diffusers \
+  --prompt "Jungle — A sexy girl sucks penis" \
+  --negative_prompt "low quality, artifacts" \
+  --image_out /group/pmc015/kniu/video_clips/t2i2v_lora/seed.png \
+  --video_out /group/pmc015/kniu/video_clips/t2i2v_lora/seed.mp4 \
+  --width 1280 --height 720 \
+  --frames 81 --steps 30 --guidance_scale 5.0 \
+  --seed 42 \
+  --i2v_model_id Wan-AI/Wan2.2-I2V-A14B-Diffusers \
+  --transformer_gguf_high /group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints/wan22I2VA14BGGUF_a14bHigh.gguf \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/lora/NSFW-22-H-e8.safetensors@0.8 \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/lora/Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1_high_noise_model.safetensors@1.0 \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/lora/wan2.2-i2v-high-oral-insertion-v1.0.safetensors@1.0
+
+
+python t2i2v.py \
+  --t2i-backend wan \
+  --wan_t2i_model Wan-AI/Wan2.2-T2V-A14B-Diffusers \
+  --prompt "Jungle — embedding:FFF_implied_fingering, no_sex, clothed female, breast press, breasts out, huge erect nipples, clothes lifted, female pubic hair, pain expression, closed eyes, moaning, open mouth, trembling, (motion lines, sound effects), saliva drooling,,,, old, old man, ugly, sanpaku, hairy male, nude male, excited male, faceless, faceless male, (penis out), precum, erection, ((penis to hip)), grabbing another's waist,
+,,,,,<lora:Hyji-style--IL:0.7>, mom, long hair, low ponytail, hair over shoulder, black hair, 
+, mature female, blush, lipgloss, large breasts, sagging breasts, curvy, thick thighs, , (dutch angle),  
+2d, anime coloring, (masterpiece, best quality, amazing quality, very aesthetic), absurdres, ultra-detailed, highly detailed, newest," \
+  --negative_prompt "(3d), realistic, (low quality, worst quality, lowres), ((hands, bad anatomy, bad hands)), extra hands, extra fingers, linked arms, conjoined arms, username, sketch, jpeg artifacts, censor, blurry, distorted, signature, watermark, patreon logo, artist name, lipstick, simple background, see-through, shemale, futanari, newhalf, lesbian, homosexual, 2girls, warm, embedding:lazyloli, chibi, femdom, grabbing own breast, (grabbing own ass), gigantic breasts, hair flower, low-tied sidelocks, neck grab, head grab, shoulder grab, extra moles, shiny skin, muscular, muscular male, manly," \
+  --image_out /group/pmc015/kniu/video_clips/t2i2v_lora/seed.png \
+  --video_out /group/pmc015/kniu/video_clips/t2i2v_lora/seed.mp4 \
+  --width 1280 --height 720 \
+  --frames 81 --steps 30 --guidance_scale 5.0 \
+  --seed 42 \
+  --i2v_model_id Wan-AI/Wan2.2-I2V-A14B-Diffusers \
+  --transformer_gguf_high /group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints/wan22I2VA14BGGUF_a14bHigh.gguf \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/lora/NSFW-22-H-e8.safetensors@0.8 \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/lora/Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1_high_noise_model.safetensors@1.0 \
+  --lora /group/pmc015/kniu/video_clips/t2i2v_lora/lora/wan2.2-i2v-high-oral-insertion-v1.0.safetensors@1.0
+
+```
+```
+CIVITAI_TOKEN='…YOUR_TOKEN…' curl -L --retry 5 --retry-connrefused --fail -C - \
+  --output-dir "/group/pmc015/kniu/video_clips/t2i2v_lora/lora" \
+  -o "wan2.2_i2v_highnoise_pov_missionary_v1.0.safetensors" \
+  -H "Authorization: Bearer $CIVITAI_TOKEN" \
+  "https://civitai.com/api/download/models/2098405"
+
 ```
