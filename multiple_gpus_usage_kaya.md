@@ -1101,3 +1101,11 @@ srun -u python -u t2i2v.py \
   --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/WAN-2.2-I2V-POV-Cowgirl-HIGH-v1.0-fixed.safetensors@1.0" \
 
 ```
+```
+pip install diffusers transformers accelerate safetensors
+python -m diffusers.pipelines.stable_diffusion.convert_from_ckpt \
+  --checkpoint_path /group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints/sdxl_unstable_diffusers_yamermix.safetensors \
+  --dump_path /group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints/sdxl_yamermix_diffusers \
+  --model_type sdxl
+
+```
