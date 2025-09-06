@@ -1079,3 +1079,25 @@ curl -L --retry 5 --retry-connrefused --fail -C - \
   "https://civitai.com/api/download/models/<MODEL_VERSION_ID>"
 
 ```
+```
+srun -u python -u t2i2v.py \
+  --t2i-backend sdxl \
+  --sdxl_model "John6666/realism-illustrious-by-stable-yogi-v45-bf16-sdxl" \
+  --prompt "$PROMPT" \
+  --image_out "$IMG_OUT" \
+  --video_out "$VID_OUT" \
+  --height 704 --width 1280 \
+  --frames 81 \
+  --guidance_scale 5.0 \
+  --steps 30 \
+  --flow_shift 5.0 \
+  --teacache 0.25 \
+  --i2v_model_id "Wan-AI/Wan2.2-I2V-A14B-Diffusers" \
+  --transformer_gguf_high "/group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints/wan22I2VA14BGGUF_a14bHigh.gguf" \
+  --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/NSFW-22-H-e8.safetensors@0.8" \
+  --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1_high_noise_model.safetensors@1.0" \
+  --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/wan2.2-i2v-high-oral-insertion-v1.0.safetensors@1.0" \
+  --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/wan2.2_i2v_highnoise_pov_missionary_v1.0.safetensors@1.0" \
+  --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/WAN-2.2-I2V-POV-Cowgirl-HIGH-v1.0-fixed.safetensors@1.0" \
+
+```
