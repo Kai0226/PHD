@@ -1070,3 +1070,12 @@ python t2i2v.py \
   --transformer_gguf_high "/group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints/wan22I2VA14BGGUF_a14bHigh.gguf"
 
 ```
+```
+CIVITAI_TOKEN='…YOUR_TOKEN…' \
+curl -L --retry 5 --retry-connrefused --fail -C - \
+  --output-dir "/group/pmc015/kniu/video_clips/t2i2v_lora/lora" \
+  -o "sdxl_unstable_diffusers_yamermix.safetensors" \
+  -H "Authorization: Bearer $CIVITAI_TOKEN" \
+  "https://civitai.com/api/download/models/<MODEL_VERSION_ID>"
+
+```
