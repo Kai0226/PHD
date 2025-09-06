@@ -1109,3 +1109,12 @@ python -m diffusers.pipelines.stable_diffusion.convert_from_ckpt \
   --model_type sdxl
 
 ```
+```
+CIVITAI_TOKEN='…YOUR_TOKEN…' \
+curl -L --retry 5 --retry-connrefused --fail -C - \
+  --output-dir "/group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints" \
+  -o "sdXL_v10VAEFix.safetensors" \
+  -H "Authorization: Bearer $CIVITAI_TOKEN" \
+  "https://civitai.com/api/download/models/128078"
+
+```
