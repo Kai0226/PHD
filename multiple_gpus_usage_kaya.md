@@ -1062,7 +1062,7 @@ python t2i2v.py \
   --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/wan2.2-i2v-high-oral-insertion-v1.0.safetensors@1.0" \
   --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/wan2.2_i2v_highnoise_pov_missionary_v1.0.safetensors@1.0" \
   --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/WAN-2.2-I2V-POV-Cowgirl-HIGH-v1.0-fixed.safetensors@1.0" \
-  --prompt "Jungle — cinematic close-up of dew on leaves, soft dawn light, volumetric rays" \
+  --prompt "Jungle — The man slowly inserts his penis into her vagina. The woman seems shocked." \
   --image_out /group/pmc015/kniu/video_clips/t2i2v_lora/seed.png \
   --video_out /group/pmc015/kniu/video_clips/t2i2v_lora/seed.mp4 \
   --frames 81 --steps 30 --guidance_scale 5.0 \
