@@ -1042,8 +1042,7 @@ srun -u python -u t2i2v.py \
   --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/WAN-2.2-I2V-POV-Cowgirl-HIGH-v1.0-fixed.safetensors@1.0" \
 
 ```
-wan2.2-i2v-high-oral-insertion-v1.0.safetensors@1.0 - ok
-wan2.2_i2v_highnoise_pov_missionary_v1.0 - ok
+
 ```
 pip install diffusers transformers accelerate safetensors
 python -m diffusers.pipelines.stable_diffusion.convert_from_ckpt \
@@ -1074,3 +1073,11 @@ sdxlUnstableDiffusers_v11Rundiffusion.safetensors
 
 used Wan2.2 checkpoint:
 /group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints/wan22I2VA14BGGUF_a14bHigh.gguf
+
+
+# Good checkpoint
+realism-illustrious-by-stable-yogi-v45-bf16-sdxl
+sdxlUnstableDiffusers_v11Rundiffusion.safetensors
+# Good Lora
+wan2.2-i2v-high-oral-insertion-v1.0.safetensors@1.0 - ok
+wan2.2_i2v_highnoise_pov_missionary_v1.0 - ok
