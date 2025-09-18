@@ -1077,7 +1077,10 @@ used Wan2.2 checkpoint:
 
 # Good checkpoint
 realism-illustrious-by-stable-yogi-v45-bf16-sdxl
+
 sdxlUnstableDiffusers_v11Rundiffusion.safetensors
+
 # Good Lora
 wan2.2-i2v-high-oral-insertion-v1.0.safetensors@1.0 - ok
+
 wan2.2_i2v_highnoise_pov_missionary_v1.0 - ok
