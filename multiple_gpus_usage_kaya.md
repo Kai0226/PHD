@@ -1084,3 +1084,25 @@ sdxlUnstableDiffusers_v11Rundiffusion.safetensors
 wan2.2-i2v-high-oral-insertion-v1.0.safetensors@1.0 - ok
 
 wan2.2_i2v_highnoise_pov_missionary_v1.0 - ok
+
+
+# Age - Encryption
+```
+conda activate wan
+conda install -c conda-forge age
+
+age-keygen -o ~/.age/identity.txt
+
+# generate key if you don't have one
+mkdir -p ~/.age && chmod 700 ~/.age
+age-keygen -o ~/.age/identity.txt
+
+# encrypt your prompts and remove plaintext
+ROOT="/group/pmc015/kniu/video_clips/t2i2v_lora"
+cd "$ROOT"
+PUBKEY="$(grep -m1 '^# public key:' ~/.age/identity.txt | awk '{print $4}')"
+age -r "$PUBKEY" -o prompts.json.age prompts.json
+# shred -u prompts.json
+chmod 600 prompts.json.age
+
+```
