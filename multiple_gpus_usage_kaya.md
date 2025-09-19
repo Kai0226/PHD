@@ -1106,8 +1106,13 @@ age-keygen -o ~/.age/identity.txt
 # encrypt your prompts and remove plaintext
 ROOT="/group/pmc015/kniu/video_clips/t2i2v_lora"
 cd "$ROOT"
+
 PUBKEY="$(grep -m1 '^# public key:' ~/.age/identity.txt | awk '{print $4}')"
-age -r "$PUBKEY" -o prompts.json.age prompts.json
+
+# age -r "$PUBKEY" -o prompts.json.age prompts.json
+
+age -r "$PUBKEY" -o prompts3_p.json.age prompts3_p3.json
+
 # shred -u prompts.json
 chmod 600 prompts.json.age
 
