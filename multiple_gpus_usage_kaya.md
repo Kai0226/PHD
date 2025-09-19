@@ -1054,12 +1054,18 @@ python -m diffusers.pipelines.stable_diffusion.convert_from_ckpt \
 
 # Checkpoints Download
 ```
+
+export CIVITAI_TOKEN=f0770bc1aa20f2d01f89981bfe48b61c
+
+
 CIVITAI_TOKEN='…YOUR_TOKEN…' \
 curl -L --retry 5 --retry-connrefused --fail -C - \
   --output-dir "/group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints" \
   -o "sdxlUnstableDiffusers_v11Rundiffusion.safetensors" \
   -H "Authorization: Bearer $CIVITAI_TOKEN" \
   "https://civitai.com/api/download/models/309729"
+
+CIVITAI_TOKEN='…YOUR_TOKEN…' curl -L --retry 5 --retry-connrefused --fail -C -   --output-dir "/group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints_p"   -o "BSSEquinoxILSemi_v25.safetensors"   -H "Authorization: Bearer $CIVITAI_TOKEN"   "https://civitai.com/api/download/models/2216071"
 
 ```
 
