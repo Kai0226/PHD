@@ -1106,3 +1106,22 @@ age -r "$PUBKEY" -o prompts.json.age prompts.json
 chmod 600 prompts.json.age
 
 ```
+```
+srun -u python -u t2i2v_encrypted.py \
+  --t2i-backend sdxl \
+  --sdxl_model "John6666/realism-illustrious-by-stable-yogi-v45-bf16-sdxl" \
+  --prompts-age "/group/pmc015/kniu/video_clips/t2i2v_lora/prompts3_p.json.age" \
+  --prompt-index "5" \
+  --image_out "/group/pmc015/kniu/video_clips/t2i2v_lora/output/images/123456_5_ab12cd34ef56.png" \
+  --video_out "/group/pmc015/kniu/video_clips/t2i2v_lora/output/videos/123456_5_ab12cd34ef56.mp4" \
+  --height 704 --width 1280 \
+  --frames 81 \
+  --guidance_scale 5.0 \
+  --steps 30 \
+  --flow_shift 5.0 \
+  --teacache 0.25 \
+  --i2v_model_id "Wan-AI/Wan2.2-I2V-A14B-Diffusers" \
+  --transformer_gguf_high "/group/pmc015/kniu/video_clips/t2i2v_lora/checkpoints/wan22I2VA14BGGUF_a14bHigh.gguf" \
+  --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/wan2.2-i2v-high-oral-insertion-v1.0.safetensors@1.0" \
+  --i2v_lora "/group/pmc015/kniu/video_clips/t2i2v_lora/lora/wan2.2_i2v_highnoise_pov_missionary_v1.0.safetensors@1.0"
+```
